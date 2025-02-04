@@ -219,92 +219,9 @@ const Admin = () => {
                             Delete
                           </Button>
 
-                          <Modal
-                            show={openModal}
-                            size="md"
-                            popup
-                            onClose={() => setOpenModal(false)}
-                            >
-                            <Modal.Header />
-                            <Modal.Body>
-                              <div className="">
-                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                                  Edit Data UMKM
-                                  <hr className="border-gray-200 mt-2x" />
-                                </h3>
-                                <div className="mt-8 block">
-                                  <Label
-                                    htmlFor="file-upload"
-                                    value="Gambar UMKM"
-                                  />
-                                </div>
-                                <FileInput id="file-upload"
-                                 onChange={(e) => setImage(e.target.files[0])}
-                                 />
-                                <div className="mt-3">
-                                  <div className=" block">
-                                    <Label htmlFor="title" value="Nama UMKM" />
-                                  </div>
-                                  <TextInput
-                                    id=""
-                                    value={nama}
-                                    onChange={(e) => setNama(e.target.value)}
-                                    placeholder="Masukkan Nama UMKM"
-                                    required
-                                  />
-                                </div>
-                                <div className="mt-3">
-                                  <div className="block">
-                                    <Label
-                                      htmlFor="deskripsi"
-                                      value="Masukkan Deskripsi UMKM"
-                                    />
-                                  </div>
-                                  <TextInput
-                                    id="deskripsi"
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
-                                    placeholder="Masukkan Deskripsi UMKM"
-                                    required
-                                  />
-                                </div>
 
-                                <div className="mt-3 block">
-                                  <fieldset>
-                                    <legend>Jenis UMKM</legend>
-                                    <div className="flex items-center gap-2">
-                                      <Radio
-                                        id="makanan"
-                                        name="kategori"
-                                        value="makanan"
-                                        checked = {kategori?.toLowerCase() == "makanan"}
-                                        onChange={(e) => {
-                                        setKategori(e.target.value)
-                                          }
-                                        }
-                                      />
-                                      <Label htmlFor="makanan">Makanan</Label>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                      <Radio
-                                        id="minuman"
-                                        name="kategori"
-                                        value="minuman"
-                                        checked = {kategori?.toLowerCase() == "minuman"}
-                                        onChange={(e) => setKategori(e.target.value)}
-                                      />
-                                      <Label htmlFor="minuman">Minuman</Label>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                      <Radio id="jasa" 
-                                      name="kategori" 
-                                      value="jasa" 
-                                      checked = {kategori?.toLowerCase() == "jasa"}
-                                      onChange={(e) => setKategori(e.target.value)}
-                                      />
-                                      <Label htmlFor="jasa">Jasa</Label>
-                                    </div>
-                                  </fieldset>
+                                  />
+                                </div>
                                 </div>
 
                                 <div className="mt-3 block">
