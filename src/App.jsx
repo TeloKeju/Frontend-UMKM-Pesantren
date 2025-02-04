@@ -43,7 +43,7 @@ const AppContent = ({ isHomeLoading, setIsHomeLoading }) => {
       {!isHomeLoading && <Header />}
       <Routes>
         <Route path="/" element={<Home setLoading={setIsHomeLoading} />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/about" element={<About />} />

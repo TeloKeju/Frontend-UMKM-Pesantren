@@ -1,24 +1,39 @@
 import { Label, TextInput, Button, Card } from "flowbite-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  
+  let navigate = useNavigate();
+  onsubmit = (e) => {
+    e.preventDefault();
+    if(username === "admin" && password === "admin"){
+      navigate('/admin', { replace: true });
+    }else{
+      alert("Username atau password salah");
+    }
+
+
+  }
+
   return (
     <>
       <main>
         <div className="p-3 my-36 lg:my-44">
-          {/* <Card> */}
           <h1 className="font-bold">ADMIN - UMKM</h1>
           <h3>Login</h3>
           <form className="mx-10 mt-3 sm:mx-36 lg:mx-56 flex text-start flex-col gap-4 ">
             <div>
-              {/* <div className="mb-2 block">
-                <Label className="s" htmlFor="email" value="Email" />
-              </div> */}
               <TextInput
-                id="email"
-                type="email"
-                placeholder="Masukkan email"
+                id="username"
+                type="text"
+                placeholder="Masukkan Username"
                 required
                 shadow
+                onChange={(e) => setUsername(e.target.value)}
                 addon="Username"
               />
             </div>
@@ -29,6 +44,7 @@ const Login = () => {
                 placeholder="Masukkan password"
                 required
                 shadow
+                onChange={(e) => setPassword(e.target.value)}
                 addon="Password"
               />
             </div>

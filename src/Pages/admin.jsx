@@ -8,9 +8,12 @@ import {
   FileInput,
 } from "flowbite-react";
 import { useState } from "react";
-
+import * as yup from 'yup'
+import {Field, Form, Formik, ErrorMessage } from "formik";
 const Admin = () => {
   const [openModal, setOpenModal] = useState(false);
+  
+
 
   return (
     <>
@@ -38,59 +41,11 @@ const Admin = () => {
                       Tambah Data UMKM
                       <hr className="border-gray-200 mt-2x" />
                     </h3>
-                    <div className="mt-8 block">
-                      <Label htmlFor="file-upload" value="Gambar UMKM" />
-                    </div>
-                    <FileInput id="file-upload" />
-                    <div className="mt-3">
-                      <div className=" block">
-                        <Label htmlFor="title" value="Nama UMKM" />
-                      </div>
-                      <TextInput
-                        id=""
-                        placeholder="Masukkan Nama UMKM"
-                        required
-                      />
-                    </div>
-                    <div className="mt-3">
-                      <div className="block">
-                        <Label
-                          htmlFor="deskripsi"
-                          value="Masukkan Deskripsi UMKM"
-                        />
-                      </div>
-                      <TextInput
-                        id="deskripsi"
-                        placeholder="Masukkan Deskripsi UMKM"
-                        required
-                      />
-                    </div>
-                    <div className="mt-3 block">
-                      <Label className="" value="Kontak" />
-                      <TextInput
-                        id="kontak"
-                        placeholder="Masukkan No HP"
-                        required
-                        shadow
-                        addon="+62"
-                      />
-                    </div>
-                    <div className="mt-3 block">
-                      <Label className="" value="Harga" />
-                      <TextInput
-                        id="harga"
-                        placeholder="Masukkan harga"
-                        required
-                        shadow
-                        addon="Rp."
-                      />
-                    </div>
+                          
+                    
 
                     <div className="mt-6">
                       <hr className="border-gray-200 mb-2x" />
-                      <Button className="mt-1 bg-gray-200 text-black">
-                        Submit
-                      </Button>
                     </div>
                   </div>
                 </Modal.Body>
