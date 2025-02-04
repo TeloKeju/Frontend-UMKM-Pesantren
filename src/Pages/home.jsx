@@ -10,22 +10,21 @@ import "swiper/css";
 import { FormatRupiah } from "@arismun/format-rupiah";
 import axios from "axios";
 
-
 const Home = ({ setLoading }) => {
   const [makanan, setMakanan] = useState([]);
-  const [minuman, setMinuman] = useState([])
-  const [jasa, setJasa] = useState([])
+  const [minuman, setMinuman] = useState([]);
+  const [jasa, setJasa] = useState([]);
 
   useEffect(() => {
-    async function makanan(){
-      return await axios.get('http://127.0.0.1:8000/api/menu/makan');
+    async function makanan() {
+      return await axios.get("http://127.0.0.1:8000/api/umkm/category/makanan");
     }
-    async function minuman(){
-      return await axios.get('http://127.0.0.1:8000/api/menu/minum');
+    async function minuman() {
+      return await axios.get("http://127.0.0.1:8000/api/umkm/category/minuman");
     }
 
-    async function jasa(){
-      return await axios.get('http://127.0.0.1:8000/api/menu/jasa');
+    async function jasa() {
+      return await axios.get("http://127.0.0.1:8000/api/umkm/category/jasa");
     }
     makanan().then((res) => {
       setMakanan(res.data);
@@ -40,7 +39,7 @@ const Home = ({ setLoading }) => {
     });
     // setMakanan();
   }, []);
-  
+
   const [loading, setLocalLoading] = useState(true);
 
   useEffect(() => {
