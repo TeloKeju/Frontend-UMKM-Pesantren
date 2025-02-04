@@ -82,7 +82,7 @@ const Detail = () => {
         <div className="mt-5 mx-12">
           <p>Lokasi dan Sosial Media</p>
           {Sosmed.map((item) => (
-            <>
+            item.link ? ( // Cek apakah link tidak null
               <a
                 key={item.id}
                 href={item.link}
@@ -93,8 +93,8 @@ const Detail = () => {
                   <p className="ms-2">{item.nama}</p>
                 </div>
               </a>
-            </>
-          ))}
+            ) : null // Jika link null, maka return null (tidak tampilkan apa-apa)
+            ))}
         </div>
       </main>
     </>
