@@ -1,6 +1,5 @@
 import { TextInput, Card } from "flowbite-react";
 
-// import { Makanan, Minuman } from "../Data/data";
 
 import { useState, useEffect } from "react";
 
@@ -9,7 +8,6 @@ import { FreeMode, Navigation, Pagination, Scrollbar } from "swiper/modules";
 import "swiper/css";
 
 import { FormatRupiah } from "@arismun/format-rupiah";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
 
@@ -20,14 +18,14 @@ const Home = ({ setLoading }) => {
 
   useEffect(() => {
     async function makanan(){
-      return await axios.get('http://127.0.0.1:8000/api/umkm/category/makanan');
+      return await axios.get('http://127.0.0.1:8000/api/menu/makan');
     }
     async function minuman(){
-      return await axios.get('http://127.0.0.1:8000/api/umkm/category/minuman');
+      return await axios.get('http://127.0.0.1:8000/api/menu/minum');
     }
 
     async function jasa(){
-      return await axios.get('http://127.0.0.1:8000/api/umkm/category/jasa');
+      return await axios.get('http://127.0.0.1:8000/api/menu/jasa');
     }
     makanan().then((res) => {
       setMakanan(res.data);
@@ -122,12 +120,12 @@ const Home = ({ setLoading }) => {
                     }}
                   >
                     <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
-                      {item.namaUmkm}
+                      {item.namaMakanan}
                     </h5>
-                    <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
+                    {/* <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
                       {item.description}
-                    </p>
-                    {/* <FormatRupiah value={item.harga} /> */}
+                    </p> */}
+                    <FormatRupiah value={item.harga} />
                   </Card>
                 </SwiperSlide>
               </>

@@ -2,8 +2,35 @@ import { Card, Carousel } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import "swiper/css";
+import { FormatRupiah } from "@arismun/format-rupiah";
 
 const Detail = () => {
+const menu = [
+ {
+  image: "https://placehold.co/100x100",
+  title: "Judul UMKM1",
+  harga: 15000
+ },
+ {
+  image: "https://placehold.co/100x100",
+  title: "Judul UMKM1",
+  harga: 15000
+ },
+ {
+  image: "https://placehold.co/100x100",
+  title: "Judul UMKM1",
+  harga: 15000
+ },
+ {
+  image: "https://placehold.co/100x100",
+  title: "Judul UMKM1",
+  harga: 15000
+ }, 
+]
+
   const [data, setData] = useState([]);
 
   const {id} = useParams()
@@ -21,7 +48,6 @@ const Detail = () => {
     
   }, []);
 
-  console.log(data);
 
   const Sosmed = [
     {
@@ -55,6 +81,11 @@ const Detail = () => {
       link: data.tiktok,
     },
   ];
+
+  data.menu && data.menu.map((item) => {
+    console.log(item)
+  })
+
 
   
   return (
@@ -93,8 +124,52 @@ const Detail = () => {
                   <p className="ms-2">{item.nama}</p>
                 </div>
               </a>
-            ) : null // Jika link null, maka return null (tidak tampilkan apa-apa)
+            ) : null 
             ))}
+        </div>
+
+        <div className="mt-5 md:mt-10">
+          <h1 className="text-start">Daftar Menu</h1>
+          <hr className="border-black" />
+        </div>
+        <div className="mt-3">
+          <Swiper
+            modules={[FreeMode, Navigation, Pagination, Scrollbar]}
+            spaceBetween={30}
+            slidesPerView={2}
+            freeMode={true}
+            // navigation
+            // pagination={{ clickable: true }}
+          >
+            {data.menu && data.menu.map((item) => (
+              <>
+                <SwiperSlide key={item.id} className=" md:!w-[400px]">
+                  <Card
+                    // href={`/detail/${item.id}`}
+                    className="w-full"
+                    imgAlt="Gambar UMKM"
+                    renderImage={() => {
+                      return (
+                        <div className="flex justify-center items-center relative w-full">
+                          <img
+                            className="h-[150px] w-[400px] sm:h-[300px] sm:w-[400] object-cover"
+                            src={`http://127.0.0.1:8000/${item.image}`}
+                            alt=""
+                          />
+                        </div>
+                      );
+                    }}
+                  >
+                    <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
+                      {item.namaMakanan}
+                    </h5>
+                    
+                    <FormatRupiah value={item.harga} />
+                  </Card>
+                </SwiperSlide>
+              </>
+            ))}
+          </Swiper>
         </div>
       </main>
     </>

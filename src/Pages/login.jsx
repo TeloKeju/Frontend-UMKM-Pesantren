@@ -12,6 +12,7 @@ const Login = () => {
     e.preventDefault();
     if(username === "admin" && password === "admin"){
       navigate('/admin', { replace: true });
+      localStorage.setItem("login", true);
     }else{
       alert("Username atau password salah");
     }

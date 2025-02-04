@@ -7,13 +7,20 @@ import {
   TextInput,
   FileInput,
 } from "flowbite-react";
-import { useState } from "react";
-import * as yup from 'yup'
-import {Field, Form, Formik, ErrorMessage } from "formik";
-const Admin = () => {
-  const [openModal, setOpenModal] = useState(false);
-  
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+
+const Admin = () => {
+  let navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    if(!localStorage.getItem("login") || localStorage.getItem("login") == 'false'){
+      navigate('/', { replace: true });
+    }
+  }, [])
+  
 
   return (
     <>
