@@ -2,6 +2,8 @@ import { TextInput, Card } from "flowbite-react";
 
 // import { Makanan, Minuman } from "../Data/data";
 
+import { useState, useEffect } from "react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Pagination, Scrollbar } from "swiper/modules";
 import "swiper/css";
@@ -10,7 +12,8 @@ import { FormatRupiah } from "@arismun/format-rupiah";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Home = () => {
+
+const Home = ({ setLoading }) => {
   const [makanan, setMakanan] = useState([]);
   const [minuman, setMinuman] = useState([])
   const [jasa, setJasa] = useState([])
@@ -40,7 +43,44 @@ const Home = () => {
     // setMakanan();
   }, []);
   
-  
+  const [loading, setLocalLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLocalLoading(false);
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [setLoading]);
+
+  if (loading) {
+    return (
+      <div className="relative flex justify-center items-center h-screen bg-[url(/BGloadingBIG.png)] bg-cover bg-center bg-no-repeat">
+        <div>
+          <Card className="mx-4 rounded-2xl h-20">
+            <div className="flex flex-row items-center">
+              <img
+                src="/umkm_ungu.png"
+                alt="Loading..."
+                className="w-20 h-20"
+              />
+              <h1 className="text-2xl">Selamat Datang</h1>
+              <img src="/logo_kkn.png" alt="Loading..." className="w-20 h-18" />
+            </div>
+          </Card>
+          <h2 className="mt-6 text-white">
+            UMKM <br /> KELURAHAN PESANTREN
+          </h2>
+          <img
+            src="/people_purpel.png"
+            alt="Gambar Kelompok KKN"
+            className="absolute bottom-[-80px] left-1/2 transform -translate-x-1/2 sm:h-[430px]  lg:h-[450px]"
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
