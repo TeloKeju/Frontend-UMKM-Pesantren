@@ -248,7 +248,7 @@ const Admin = () => {
                                 <div className="flex items-center gap-2">
                                   <Radio
                                     id="makanan"
-                                    name="makanan"
+                                    name="jenis"
                                     value="Makanan"
                                     defaultChecked
                                   />
@@ -257,13 +257,13 @@ const Admin = () => {
                                 <div className="flex items-center gap-2">
                                   <Radio
                                     id="minuman"
-                                    name="minuman"
+                                    name="jenis"
                                     value="Minuman"
                                   />
                                   <Label htmlFor="minuman">Minuman</Label>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <Radio id="jasa" name="jasa" value="Jasa" />
+                                  <Radio id="jasa" name="jenis" value="Jasa" />
                                   <Label htmlFor="jasa">Jasa</Label>
                                 </div>
                               </fieldset>
