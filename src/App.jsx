@@ -16,6 +16,11 @@ import Detail from "./Pages/detail";
 import Admin from "./Pages/admin";
 import About from "./Pages/about";
 import Logout from "./Pages/logout";
+import Add from "./Pages/CRUD/add";
+import Update from "./Pages/CRUD/update";
+import Menu from "./Pages/CRUD/menu";
+import AddMenu from "./Pages/CRUD/addMenu";
+import UpdateMenu from "./Pages/CRUD/updateMenu";
 
 const App = () => {
   const [isHomeLoading, setIsHomeLoading] = useState(true);
@@ -47,7 +52,15 @@ const AppContent = ({ isHomeLoading, setIsHomeLoading }) => {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/add" element={<Add />} />
+        <Route path="/admin/update" element={<Update />} />
+
+        <Route path="/admin/menu" element={<Menu />} />
+        <Route path="/admin/menu/add" element={<AddMenu />} />
+        <Route path="/admin/menu/update" element={<UpdateMenu />} />
+
         <Route path="/about" element={<About />} />
       </Routes>
       {!isHomeLoading && <Footer />}
