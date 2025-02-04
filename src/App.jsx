@@ -15,6 +15,7 @@ import Login from "./Pages/login";
 import Detail from "./Pages/detail";
 import Admin from "./Pages/admin";
 import About from "./Pages/about";
+import Logout from "./Pages/logout";
 
 const App = () => {
   const [isHomeLoading, setIsHomeLoading] = useState(true);
@@ -45,6 +46,7 @@ const AppContent = ({ isHomeLoading, setIsHomeLoading }) => {
         <Route path="/" element={<Home setLoading={setIsHomeLoading} />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/about" element={<About />} />
       </Routes>

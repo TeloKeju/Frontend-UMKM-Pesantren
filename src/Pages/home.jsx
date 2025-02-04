@@ -1,6 +1,5 @@
 import { TextInput, Card } from "flowbite-react";
 
-// import { Makanan, Minuman } from "../Data/data";
 
 import { useState, useEffect } from "react";
 
@@ -120,12 +119,12 @@ const Home = ({ setLoading }) => {
                     }}
                   >
                     <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
-                      {item.namaUmkm}
+                      {item.namaMakanan}
                     </h5>
-                    <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
+                    {/* <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
                       {item.description}
-                    </p>
-                    {/* <FormatRupiah value={item.harga} /> */}
+                    </p> */}
+                    <FormatRupiah value={item.harga} />
                   </Card>
                 </SwiperSlide>
               </>
