@@ -1,39 +1,62 @@
 import { Card, Carousel } from "flowbite-react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Detail = () => {
+  const [data, setData] = useState([]);
+
+  const {id} = useParams()
+
+  useEffect(() => {
+    async function fetchData() {
+      return await axios.get(`http://127.0.0.1:8000/api/umkm/${id}`);
+    }
+
+    fetchData().then((res) => {
+      setData(res.data);
+    })
+    
+    
+    
+  }, []);
+
+  console.log(data);
+
   const Sosmed = [
     {
       id: 1,
       img: "/whatsapp.png",
-      nama: "Nama Sosial Media",
-      link: "",
+      nama: "Whatsapp",
+      link: data.whatsapp,
     },
     {
       id: 2,
       img: "/location.png",
-      nama: "Nama Sosial Media",
-      link: "",
+      nama: "Maps",
+      link: data.maps,
     },
     {
       id: 3,
       img: "/facebook.png",
-      nama: "Nama Sosial Media",
-      link: "",
+      nama: "Facebook",
+      link:data.facebook ,
     },
     {
       id: 4,
       img: "/instagram.png",
-      nama: "Nama Sosial Media",
-      link: "",
+      nama: "instagram",
+      link: data.instagram,
     },
     {
       id: 5,
       img: "/tiktok.png",
-      nama: "Nama Sosial Media",
-      link: "",
+      nama: "tiktok",
+      link: data.tiktok,
     },
   ];
 
+  
   return (
     <>
       <div className="h-56 sm:h-64 xl:h-[500px] 2xl:h-full">
@@ -41,21 +64,7 @@ const Detail = () => {
           <div className="relative flex justify-center items-center">
             <img
               className="w-full"
-              src="https://placehold.co/100x100"
-              alt="foto makanan"
-            />
-          </div>
-          <div className="relative flex justify-center items-center">
-            <img
-              className="w-full"
-              src="https://placehold.co/100x100"
-              alt="foto makanan"
-            />
-          </div>
-          <div className="relative flex justify-center items-center">
-            <img
-              className="w-full"
-              src="https://placehold.co/100x100"
+              src={`http://127.0.0.1:8000/${data.image}`}
               alt="foto makanan"
             />
           </div>
@@ -64,11 +73,10 @@ const Detail = () => {
 
       <main className="p-7 md:p-14 lg:p-28">
         <h5 className="text-md font-bold tracking-tight text-gray-900 dark:text-white">
-          Judul UMKM
+          {data.namaUmkm}
         </h5>
         <p className="font-normal text-gray-700 dark:text-gray-400">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident
-          eveniet explicabo saepe rem aliquam animi ex, culpa in quod illo minus
+          {data.description}
         </p>
 
         <div className="mt-5 mx-12">

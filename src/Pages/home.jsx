@@ -1,15 +1,47 @@
 import { TextInput, Card } from "flowbite-react";
 
-import { Makanan, Minuman } from "../Data/data";
+// import { Makanan, Minuman } from "../Data/data";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Pagination, Scrollbar } from "swiper/modules";
 import "swiper/css";
 
 import { FormatRupiah } from "@arismun/format-rupiah";
-// import "swiper/css/freemode";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Home = () => {
+  const [makanan, setMakanan] = useState([]);
+  const [minuman, setMinuman] = useState([])
+  const [jasa, setJasa] = useState([])
+
+  useEffect(() => {
+    async function makanan(){
+      return await axios.get('http://127.0.0.1:8000/api/umkm/category/makanan');
+    }
+    async function minuman(){
+      return await axios.get('http://127.0.0.1:8000/api/umkm/category/minuman');
+    }
+
+    async function jasa(){
+      return await axios.get('http://127.0.0.1:8000/api/umkm/category/jasa');
+    }
+    makanan().then((res) => {
+      setMakanan(res.data);
+    });
+
+    minuman().then((res) => {
+      setMinuman(res.data);
+    });
+
+    jasa().then((res) => {
+      setJasa(res.data);
+    });
+    // setMakanan();
+  }, []);
+  
+  
+
   return (
     <>
       <main className="p-7 md:p-14 lg:p-28">
@@ -30,20 +62,66 @@ const Home = () => {
             // navigation
             // pagination={{ clickable: true }}
           >
-            {Makanan.map((item) => (
+            {makanan.map((item) => (
               <>
-                <SwiperSlide className=" md:!w-[400px]">
+                <SwiperSlide key={item.id} className=" md:!w-[400px]">
                   <Card
-                    href="/detail"
+                    href={`/detail/${item.id}`}
                     className="w-full"
                     imgAlt="Gambar UMKM"
+                    renderImage={() => {
+                      return (
+                        <div className="flex justify-center items-center relative w-full">
+                          <img
+                            className="h-[150px] w-[400px] sm:h-[300px] sm:w-[400] object-cover"
+                            src={`http://127.0.0.1:8000/${item.image}`}
+                            alt=""
+                          />
+                        </div>
+                      );
+                    }}
+                  >
+                    <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
+                      {item.namaUmkm}
+                    </h5>
+                    <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
+                      {item.description}
+                    </p>
+                    {/* <FormatRupiah value={item.harga} /> */}
+                  </Card>
+                </SwiperSlide>
+              </>
+            ))}
+          </Swiper>
+        </div>
+
+        <div className="mt-5 md:mt-10">
+          <h1 className="text-start">Minuman</h1>
+          <hr className="border-black" />
+        </div>
+        <div className="mt-3">
+          <Swiper
+            modules={[FreeMode, Navigation, Pagination, Scrollbar]}
+            spaceBetween={30}
+            slidesPerView={2}
+            freeMode={true}
+            // navigation
+            // pagination={{ clickable: true }}
+          >
+            {minuman.map((item) => (
+              <>
+                <SwiperSlide className=" md:!w-[400px]">
+                  <Card
+                    href="/detail"
+                    className=" w-full"
+                    imgAlt="Gambar UMKM"
                     // imgSrc={item.image}
                     renderImage={() => {
                       return (
                         <div className="flex justify-center items-center relative w-full">
                           <img
                             className="h-[150px] w-[400px] sm:h-[300px] sm:w-[400] object-cover"
-                            src={item.image}
+                            src={`http://127.0.0.1:8000/${item.image}`}
                             alt=""
                           />
                         </div>
@@ -65,7 +143,7 @@ const Home = () => {
         </div>
 
         <div className="mt-5 md:mt-10">
-          <h1 className="text-start">Minuman</h1>
+          <h1 className="text-start">Jasa</h1>
           <hr className="border-black" />
         </div>
         <div className="mt-3">
@@ -77,7 +155,7 @@ const Home = () => {
             // navigation
             // pagination={{ clickable: true }}
           >
-            {Minuman.map((item) => (
+            {jasa.map((item) => (
               <>
                 <SwiperSlide className=" md:!w-[400px]">
                   <Card
@@ -90,54 +168,7 @@ const Home = () => {
                         <div className="flex justify-center items-center relative w-full">
                           <img
                             className="h-[150px] w-[400px] sm:h-[300px] sm:w-[400] object-cover"
-                            src={item.image}
-                            alt=""
-                          />
-                        </div>
-                      );
-                    }}
-                  >
-                    <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
-                      {item.title}
-                    </h5>
-                    <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
-                      {item.deskripsi}
-                    </p>
-                    <FormatRupiah value={item.harga} />
-                  </Card>
-                </SwiperSlide>
-              </>
-            ))}
-          </Swiper>
-        </div>
-
-        <div className="mt-5 md:mt-10">
-          <h1 className="text-start">Minuman</h1>
-          <hr className="border-black" />
-        </div>
-        <div className="mt-3">
-          <Swiper
-            modules={[FreeMode, Navigation, Pagination, Scrollbar]}
-            spaceBetween={30}
-            slidesPerView={2}
-            freeMode={true}
-            // navigation
-            // pagination={{ clickable: true }}
-          >
-            {Minuman.map((item) => (
-              <>
-                <SwiperSlide className=" md:!w-[400px]">
-                  <Card
-                    href="/detail"
-                    className=" w-full"
-                    imgAlt="Gambar UMKM"
-                    // imgSrc={item.image}
-                    renderImage={() => {
-                      return (
-                        <div className="flex justify-center items-center relative w-full">
-                          <img
-                            className="h-[150px] w-[400px] sm:h-[300px] sm:w-[400] object-cover"
-                            src={item.image}
+                            src={`http://127.0.0.1:8000/${item.image}`}
                             alt=""
                           />
                         </div>
