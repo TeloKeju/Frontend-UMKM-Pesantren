@@ -6,8 +6,64 @@ import {
   Radio,
   Button,
 } from "flowbite-react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const UpdateMenu = () => {
+  const { id } = useParams();
+  const [data, setData] = useState(null); // Gunakan null awalnya untuk cek apakah data sudah di-fetch
+  const [image, setImage] = useState(null);
+  const [nama, setNama] = useState("");
+  const [kategori, setKategori] = useState("");
+  const [harga, setHarga] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/api/menu/${id}`);
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  // Perbarui state setelah data diambil
+  useEffect(() => {
+    if (data) {
+      setNama(data.namaMakanan || "");
+      setKategori(data.category || "");
+      setHarga(data.harga || "");
+    }
+  }, [data]); 
+
+  const handleSubmit = async (e) => {
+    console.log(data)
+    // console.log(data.harga)
+    e.preventDefault();
+    const formData = new FormData();
+
+    if(image){
+      formData.append("image", image);
+    }
+    formData.append("umkm_id", data.umkm_id);
+    formData.append("namaMakanan", nama);
+    formData.append("category", kategori);
+    formData.append("harga", harga);
+    formData.append("_method", "PATCH");
+
+    await axios.post(`http://127.0.0.1:8000/api/menu/${id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }).then(() => {
+      alert("Data berhasil diupdate");
+    })
+  }
+
   return (
     <>
       <main className="p-5 my-10 sm:mx-32 lg:mx-60">
@@ -23,7 +79,7 @@ const UpdateMenu = () => {
               <Label htmlFor="file-upload" value="Gambar Menu" />
               <FileInput
                 id="file-upload"
-                //   onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) => setImage(e.target.files[0])}
               />
             </div>
 
@@ -33,7 +89,8 @@ const UpdateMenu = () => {
               <TextInput
                 id="title"
                 placeholder="Masukkan Nama Menu"
-                //   onChange={(e) => setNama(e.target.value)}
+                value={nama}
+                onChange={(e) => setNama(e.target.value)}
                 required
               />
             </div>
@@ -46,8 +103,9 @@ const UpdateMenu = () => {
                   <Radio
                     id="makanan"
                     name="kategori"
-                    value="Makanan"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="makanan"
+                    checked={kategori == "makanan"}
+                    onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="makanan">Makanan</Label>
                 </div>
@@ -55,8 +113,9 @@ const UpdateMenu = () => {
                   <Radio
                     id="minuman"
                     name="kategori"
-                    value="Minuman"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="minuman"
+                    checked={kategori === "minuman"}
+                    onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="minuman">Minuman</Label>
                 </div>
@@ -64,8 +123,9 @@ const UpdateMenu = () => {
                   <Radio
                     id="jasa"
                     name="kategori"
-                    value="Jasa"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="jasa"
+                    checked={kategori === "jasa"}
+                    onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="jasa">Jasa</Label>
                 </div>
@@ -78,7 +138,8 @@ const UpdateMenu = () => {
               <TextInput
                 id="price"
                 placeholder="Masukkan Harga Menu, Contoh: 15000"
-                //   onChange={(e) => setNama(e.target.value)}
+                value={harga}
+                onChange={(e) => setHarga(e.target.value)}
                 required
               />
             </div>
@@ -86,9 +147,8 @@ const UpdateMenu = () => {
             {/* Tombol Submit */}
             <div className="mt-6">
               <hr className="border-gray-200 mb-2" />
-              <Button
-                className="mt-1 bg-gray-200 text-black"
-                //   onClick={handleSubmit}
+              <Button className="mt-1 bg-gray-200 text-black"
+              onClick={handleSubmit}
               >
                 Submit
               </Button>

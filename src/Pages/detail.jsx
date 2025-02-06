@@ -48,6 +48,8 @@ const menu = [
     
   }, []);
 
+  console.log(data)
+
 
   const Sosmed = [
     {
@@ -141,7 +143,7 @@ const menu = [
             // navigation
             // pagination={{ clickable: true }}
           >
-            {data.menu && data.menu.map((item) => (
+            {data.menu?.map((item) => (
               <>
                 <SwiperSlide key={item.id} className=" md:!w-[400px]">
                   <Card

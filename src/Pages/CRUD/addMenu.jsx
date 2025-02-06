@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   Card,
   Label,
@@ -6,8 +7,37 @@ import {
   Radio,
   Button,
 } from "flowbite-react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const AddMenu = () => {
+  const { id } = useParams();
+  const [image, setImage] = useState(null);
+  const [nama, setNama] = useState("");
+  const [kategori, setKategori] = useState("");
+  const [price, setPrice] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    // formData.append("id", null);
+    formData.append("umkm_id", id);
+    formData.append("image", image);
+    formData.append("namaMakanan", nama);
+    formData.append("category", kategori);
+    formData.append("harga", price);
+
+    await axios.post(`http://127.0.0.1:8000/api/menu`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }).then(() => {
+      alert("Data berhasil ditambahkan");
+      // navigate("/admin");
+    })
+  }
+
   return (
     <>
       <main className="p-5 my-10 sm:mx-32 lg:mx-60">
@@ -23,7 +53,7 @@ const AddMenu = () => {
               <Label htmlFor="file-upload" value="Gambar Menu" />
               <FileInput
                 id="file-upload"
-                //   onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => setImage(e.target.files[0])}
               />
             </div>
 
@@ -33,7 +63,7 @@ const AddMenu = () => {
               <TextInput
                 id="title"
                 placeholder="Masukkan Nama Menu"
-                //   onChange={(e) => setNama(e.target.value)}
+                  onChange={(e) => setNama(e.target.value)}
                 required
               />
             </div>
@@ -46,8 +76,8 @@ const AddMenu = () => {
                   <Radio
                     id="makanan"
                     name="kategori"
-                    value="Makanan"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="makanan"
+                      onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="makanan">Makanan</Label>
                 </div>
@@ -55,8 +85,8 @@ const AddMenu = () => {
                   <Radio
                     id="minuman"
                     name="kategori"
-                    value="Minuman"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="minuman"
+                      onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="minuman">Minuman</Label>
                 </div>
@@ -64,8 +94,8 @@ const AddMenu = () => {
                   <Radio
                     id="jasa"
                     name="kategori"
-                    value="Jasa"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="jasa"
+                      onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="jasa">Jasa</Label>
                 </div>
@@ -78,7 +108,7 @@ const AddMenu = () => {
               <TextInput
                 id="price"
                 placeholder="Masukkan Harga Menu, Contoh: 15000"
-                //   onChange={(e) => setNama(e.target.value)}
+                  onChange={(e) => setPrice(e.target.value)}
                 required
               />
             </div>
@@ -88,7 +118,7 @@ const AddMenu = () => {
               <hr className="border-gray-200 mb-2" />
               <Button
                 className="mt-1 bg-gray-200 text-black"
-                //   onClick={handleSubmit}
+                  onClick={handleSubmit}
               >
                 Submit
               </Button>

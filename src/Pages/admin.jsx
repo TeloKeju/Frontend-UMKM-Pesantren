@@ -141,7 +141,7 @@ const Admin = () => {
                         <Table.Cell>
                           <Button
                             className=" bg-gray-200 text-black"
-                            onClick={() => navigate("/admin/menu")}
+                            onClick={() => navigate(`/admin/menu/${data.id}`)}
                           >
                             Tambah Daftar Menu
                           </Button>
@@ -150,7 +150,7 @@ const Admin = () => {
                           <div className="flex flex-row justify-center items-center gap-3">
                             <Button
                               className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                              onClick={() => navigate("/admin/update")}
+                              onClick={() => navigate(`/admin/update/${data.id}`)}
                             >
                               Update Menu
                             </Button>
