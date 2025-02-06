@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   Card,
   Label,
@@ -6,8 +7,70 @@ import {
   Radio,
   Button,
 } from "flowbite-react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Update = () => {
+  let navigate = useNavigate();
+  const {id} = useParams();
+  const [data, setData] = useState(null);
+
+  const [image, setImage] = useState(null);
+  const [nama, setNama] = useState("");
+  const [description, setDescription] = useState("");
+  const [kategori, setKategori] = useState("");
+  const [map, setMap] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [tiktok, setTiktok] = useState("");
+  const [facebook, setFacebook] = useState("");
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      await axios.get(`http://127.0.0.1:8000/api/umkm/${id}`).then((res) => {
+        setData(res.data);
+        setNama(res.data.namaUmkm);
+        setDescription(res.data.description);
+        setKategori(res.data.category);
+        setMap(res.data.maps  );
+        setWhatsapp(res.data.whatsapp);
+        setInstagram(res.data.instagram);
+        setTiktok(res.data.tiktok);
+        setFacebook(res.data.facebook);
+
+      })
+    }
+    fetchData();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    if(image){
+      formData.append("image", image);
+    }
+    formData.append("namaUmkm", nama);
+    formData.append("description", description);
+    formData.append("category", kategori);
+    formData.append("maps", map);
+    formData.append("whatsapp", whatsapp);
+    formData.append("instagram", instagram);
+    formData.append("tiktok", tiktok);
+    formData.append("facebook", facebook);
+
+    await axios.post(`http://127.0.0.1:8000/api/umkm/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(() => {
+      alert("Data berhasil diubah");
+      navigate("/admin");
+    })
+  }
+
+  
   return (
     <>
       <main className="p-5 my-10 sm:mx-32 lg:mx-60">
@@ -23,7 +86,7 @@ const Update = () => {
               <Label htmlFor="file-upload" value="Gambar UMKM" />
               <FileInput
                 id="file-upload"
-                //   onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => setImage(e.target.files[0])}
               />
             </div>
 
@@ -33,7 +96,8 @@ const Update = () => {
               <TextInput
                 id="title"
                 placeholder="Masukkan Nama UMKM"
-                //   onChange={(e) => setNama(e.target.value)}
+                value={nama}
+                  onChange={(e) => setNama(e.target.value)}
                 required
               />
             </div>
@@ -44,7 +108,8 @@ const Update = () => {
               <TextInput
                 id="deskripsi"
                 placeholder="Masukkan Deskripsi UMKM"
-                //   onChange={(e) => setDescription(e.target.value)}
+                value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 required
               />
             </div>
@@ -57,8 +122,9 @@ const Update = () => {
                   <Radio
                     id="makanan"
                     name="kategori"
-                    value="Makanan"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="makanan"
+                    checked={kategori == "makanan"}
+                      onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="makanan">Makanan</Label>
                 </div>
@@ -66,8 +132,9 @@ const Update = () => {
                   <Radio
                     id="minuman"
                     name="kategori"
-                    value="Minuman"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="minuman"
+                    checked={kategori == "minuman"}
+                      onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="minuman">Minuman</Label>
                 </div>
@@ -75,8 +142,9 @@ const Update = () => {
                   <Radio
                     id="jasa"
                     name="kategori"
-                    value="Jasa"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="jasa"
+                    checked={kategori == "jasa"}
+                      onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="jasa">Jasa</Label>
                 </div>
@@ -89,39 +157,44 @@ const Update = () => {
               <TextInput
                 id="map"
                 placeholder="Masukkan Link MAP"
-                //   onChange={(e) => setMap(e.target.value)}
+                value={map}
+                  onChange={(e) => setMap(e.target.value)}
               />
             </div>
             <div className="mt-3 block">
               <Label value="WhatsApp" />
               <TextInput
                 id="wa"
+                value={whatsapp}
                 placeholder="Masukkan Link WA"
-                //   onChange={(e) => setWhatsapp(e.target.value)}
+                  onChange={(e) => setWhatsapp(e.target.value)}
               />
             </div>
             <div className="mt-3 block">
               <Label value="Instagram" />
               <TextInput
                 id="ig"
+                value={instagram}
                 placeholder="Masukkan Link IG"
-                //   onChange={(e) => setInstagram(e.target.value)}
+                  onChange={(e) => setInstagram(e.target.value)}
               />
             </div>
             <div className="mt-3 block">
               <Label value="Tiktok" />
               <TextInput
                 id="tt"
+                value={tiktok}
                 placeholder="Masukkan Link Tiktok"
-                //   onChange={(e) => setTiktok(e.target.value)}
+                  onChange={(e) => setTiktok(e.target.value)}
               />
             </div>
             <div className="mt-3 block">
               <Label value="Facebook" />
               <TextInput
                 id="fb"
+                value={facebook}
                 placeholder="Masukkan Link Facebook"
-                //   onChange={(e) => setFacebook(e.target.value)}
+                  onChange={(e) => setFacebook(e.target.value)}
               />
             </div>
 
@@ -130,7 +203,7 @@ const Update = () => {
               <hr className="border-gray-200 mb-2" />
               <Button
                 className="mt-1 bg-gray-200 text-black"
-                //   onClick={handleSubmit}
+                  onClick={handleSubmit}
               >
                 Submit
               </Button>

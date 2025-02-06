@@ -55,11 +55,11 @@ const AppContent = ({ isHomeLoading, setIsHomeLoading }) => {
 
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/add" element={<Add />} />
-        <Route path="/admin/update" element={<Update />} />
+        <Route path="/admin/update/:id" element={<Update />} />
 
-        <Route path="/admin/menu" element={<Menu />} />
-        <Route path="/admin/menu/add" element={<AddMenu />} />
-        <Route path="/admin/menu/update" element={<UpdateMenu />} />
+        <Route path="/admin/menu/:id" element={<Menu />} />
+        <Route path="/admin/menu/add/:id" element={<AddMenu />} />
+        <Route path="/admin/menu/update/:id" element={<UpdateMenu />} />
 
         <Route path="/about" element={<About />} />
       </Routes>

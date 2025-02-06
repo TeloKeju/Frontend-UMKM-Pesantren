@@ -103,7 +103,7 @@ const Home = ({ setLoading }) => {
               <>
                 <SwiperSlide key={item.id} className=" md:!w-[400px]">
                   <Card
-                    href={`/detail/${item.id}`}
+                    href={`/detail/${item.umkm_id}`}
                     className="w-full"
                     imgAlt="Gambar UMKM"
                     renderImage={() => {
@@ -120,6 +120,7 @@ const Home = ({ setLoading }) => {
                   >
                     <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
                       {item.namaMakanan}
+                      {console.log(item)}
                     </h5>
                     {/* <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
                       {item.description}

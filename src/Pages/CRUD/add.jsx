@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   Card,
   Label,
@@ -6,8 +7,48 @@ import {
   Radio,
   Button,
 } from "flowbite-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Add = () => {
+  let navigate = useNavigate();
+  const [image, setImage] = useState(null);
+  const [nama, setNama] = useState("");
+  const [description, setDescription] = useState("");
+  const [kategori, setKategori] = useState("");
+  const [map, setMap] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [tiktok, setTiktok] = useState("");
+  const [facebook, setFacebook] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    
+    formData.append("image", image);
+    formData.append("namaUmkm", nama);
+    formData.append("description", description);
+    formData.append("category", kategori);
+    formData.append("map", map);
+    formData.append("whatsapp", whatsapp);
+    formData.append("instagram", instagram);
+    formData.append("tiktok", tiktok);
+    formData.append("facebook", facebook);
+
+    await axios.post("http://127.0.0.1:8000/api/umkm", formData, {
+      headers: {
+      'Content-Type': 'multipart/form-data'
+      }
+    }).then(() => {
+      alert("Data berhasil ditambahkan");
+      navigate("/admin");
+    })
+
+
+  }
+
   return (
     <>
       <main className="p-5 my-10 sm:mx-32 lg:mx-60">
@@ -23,7 +64,7 @@ const Add = () => {
               <Label htmlFor="file-upload" value="Gambar UMKM" />
               <FileInput
                 id="file-upload"
-                //   onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => setImage(e.target.files[0])}
               />
             </div>
 
@@ -33,7 +74,7 @@ const Add = () => {
               <TextInput
                 id="title"
                 placeholder="Masukkan Nama UMKM"
-                //   onChange={(e) => setNama(e.target.value)}
+                  onChange={(e) => setNama(e.target.value)}
                 required
               />
             </div>
@@ -44,7 +85,7 @@ const Add = () => {
               <TextInput
                 id="deskripsi"
                 placeholder="Masukkan Deskripsi UMKM"
-                //   onChange={(e) => setDescription(e.target.value)}
+                  onChange={(e) => setDescription(e.target.value)}
                 required
               />
             </div>
@@ -57,8 +98,8 @@ const Add = () => {
                   <Radio
                     id="makanan"
                     name="kategori"
-                    value="Makanan"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="makanan"
+                      onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="makanan">Makanan</Label>
                 </div>
@@ -66,8 +107,8 @@ const Add = () => {
                   <Radio
                     id="minuman"
                     name="kategori"
-                    value="Minuman"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="minuman"
+                      onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="minuman">Minuman</Label>
                 </div>
@@ -75,8 +116,8 @@ const Add = () => {
                   <Radio
                     id="jasa"
                     name="kategori"
-                    value="Jasa"
-                    //   onChange={(e) => setKategori(e.target.value)}
+                    value="jasa"
+                      onChange={(e) => setKategori(e.target.value)}
                   />
                   <Label htmlFor="jasa">Jasa</Label>
                 </div>
@@ -89,7 +130,7 @@ const Add = () => {
               <TextInput
                 id="map"
                 placeholder="Masukkan Link MAP"
-                //   onChange={(e) => setMap(e.target.value)}
+                  onChange={(e) => setMap(e.target.value)}
               />
             </div>
             <div className="mt-3 block">
@@ -97,7 +138,7 @@ const Add = () => {
               <TextInput
                 id="wa"
                 placeholder="Masukkan Link WA"
-                //   onChange={(e) => setWhatsapp(e.target.value)}
+                  onChange={(e) => setWhatsapp(e.target.value)}
               />
             </div>
             <div className="mt-3 block">
@@ -105,7 +146,7 @@ const Add = () => {
               <TextInput
                 id="ig"
                 placeholder="Masukkan Link IG"
-                //   onChange={(e) => setInstagram(e.target.value)}
+                  onChange={(e) => setInstagram(e.target.value)}
               />
             </div>
             <div className="mt-3 block">
@@ -113,7 +154,7 @@ const Add = () => {
               <TextInput
                 id="tt"
                 placeholder="Masukkan Link Tiktok"
-                //   onChange={(e) => setTiktok(e.target.value)}
+                  onChange={(e) => setTiktok(e.target.value)}
               />
             </div>
             <div className="mt-3 block">
@@ -121,7 +162,7 @@ const Add = () => {
               <TextInput
                 id="fb"
                 placeholder="Masukkan Link Facebook"
-                //   onChange={(e) => setFacebook(e.target.value)}
+                  onChange={(e) => setFacebook(e.target.value)}
               />
             </div>
 
@@ -130,7 +171,7 @@ const Add = () => {
               <hr className="border-gray-200 mb-2" />
               <Button
                 className="mt-1 bg-gray-200 text-black"
-                //   onClick={handleSubmit}
+                  onClick={handleSubmit}
               >
                 Submit
               </Button>
