@@ -42,6 +42,19 @@ const Admin = () => {
     getData().then((data) => setUmkm(data.data));
   }, []);
 
+  const deleteClick = async (id) => {
+    try{
+      await axios.delete(`http://127.0.0.1:8000/api/umkm?id=${id}`).then(() => {
+        alert("Data berhasil dihapus");
+        window.location.reload();
+      })
+    }catch (error) {
+      console.error(error);
+      alert("Gagal mengunggah data.");
+    }
+    
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -129,7 +142,7 @@ const Admin = () => {
                         <Table.Cell>
                           <img
                             className=""
-                            src="https://placehold.co/100x100"
+                            src={`http://127.0.0.1:8000/${data.image}`}
                             alt=""
                           />
                         </Table.Cell>
@@ -156,7 +169,7 @@ const Admin = () => {
                             </Button>
                             <Button
                               className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                              // onClick={() => navigate("/admin/update")}
+                              onClick={() => deleteClick(data.id)}
                             >
                               Delete Menu
                             </Button>

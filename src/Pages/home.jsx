@@ -103,7 +103,7 @@ const Home = ({ setLoading }) => {
               <>
                 <SwiperSlide key={item.id} className=" md:!w-[400px]">
                   <Card
-                    href={`/detail/${item.umkm_id}`}
+                    href={`/detail/${item.id}`}
                     className="w-full"
                     imgAlt="Gambar UMKM"
                     renderImage={() => {
@@ -119,13 +119,12 @@ const Home = ({ setLoading }) => {
                     }}
                   >
                     <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
-                      {item.namaMakanan}
-                      {console.log(item)}
+                      {item.namaUmkm}
                     </h5>
-                    {/* <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
+                    <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
                       {item.description}
-                    </p> */}
-                    <FormatRupiah value={item.harga} />
+                    </p>
+                    {/* <FormatRupiah value={item.harga} /> */}
                   </Card>
                 </SwiperSlide>
               </>
@@ -150,10 +149,9 @@ const Home = ({ setLoading }) => {
               <>
                 <SwiperSlide className=" md:!w-[400px]">
                   <Card
-                    href="/detail"
+                    href={`/detail/${item.id}`}
                     className=" w-full"
                     imgAlt="Gambar UMKM"
-                    // imgSrc={item.image}
                     renderImage={() => {
                       return (
                         <div className="flex justify-center items-center relative w-full">
@@ -167,12 +165,12 @@ const Home = ({ setLoading }) => {
                     }}
                   >
                     <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
-                      {item.title}
+                      {item.namaUmkm}
                     </h5>
+
                     <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
-                      {item.deskripsi}
+                      {item.description}
                     </p>
-                    <FormatRupiah value={item.harga} />
                   </Card>
                 </SwiperSlide>
               </>
@@ -197,7 +195,7 @@ const Home = ({ setLoading }) => {
               <>
                 <SwiperSlide className=" md:!w-[400px]">
                   <Card
-                    href="/detail"
+                    href={`/detail/${item.id}`}
                     className=" w-full"
                     imgAlt="Gambar UMKM"
                     // imgSrc={item.image}
@@ -214,12 +212,11 @@ const Home = ({ setLoading }) => {
                     }}
                   >
                     <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
-                      {item.title}
+                      {item.namaUmkm}
                     </h5>
                     <p className="max-sm:truncate font-normal text-gray-700 dark:text-gray-400">
-                      {item.deskripsi}
+                      {item.description}
                     </p>
-                    <FormatRupiah value={item.harga} />
                   </Card>
                 </SwiperSlide>
               </>

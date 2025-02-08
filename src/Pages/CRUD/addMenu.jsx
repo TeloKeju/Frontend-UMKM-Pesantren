@@ -8,10 +8,11 @@ import {
   Button,
 } from "flowbite-react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddMenu = () => {
   const { id } = useParams();
+  let navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [nama, setNama] = useState("");
   const [kategori, setKategori] = useState("");
@@ -33,8 +34,9 @@ const AddMenu = () => {
         "Content-Type": "multipart/form-data",
       },
     }).then(() => {
+
+      navigate(`/admin/menu/${id}`);
       alert("Data berhasil ditambahkan");
-      // navigate("/admin");
     })
   }
 
