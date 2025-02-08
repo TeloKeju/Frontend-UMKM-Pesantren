@@ -142,7 +142,7 @@ const Admin = () => {
                         <Table.Cell>
                           <img
                             className=""
-                            src="https://placehold.co/100x100"
+                            src={`http://127.0.0.1:8000/${data.image}`}
                             alt=""
                           />
                         </Table.Cell>

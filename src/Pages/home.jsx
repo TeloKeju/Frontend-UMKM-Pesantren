@@ -103,7 +103,7 @@ const Home = ({ setLoading }) => {
               <>
                 <SwiperSlide key={item.id} className=" md:!w-[400px]">
                   <Card
-                    href={`/detail/${item.umkm_id}`}
+                    href={`/detail/${item.id}`}
                     className="w-full"
                     imgAlt="Gambar UMKM"
                     renderImage={() => {
@@ -149,7 +149,7 @@ const Home = ({ setLoading }) => {
               <>
                 <SwiperSlide className=" md:!w-[400px]">
                   <Card
-                    href="/detail"
+                    href={`/detail/${item.id}`}
                     className=" w-full"
                     imgAlt="Gambar UMKM"
                     renderImage={() => {
@@ -195,7 +195,7 @@ const Home = ({ setLoading }) => {
               <>
                 <SwiperSlide className=" md:!w-[400px]">
                   <Card
-                    href="/detail"
+                    href={`/detail/${item.id}`}
                     className=" w-full"
                     imgAlt="Gambar UMKM"
                     // imgSrc={item.image}
