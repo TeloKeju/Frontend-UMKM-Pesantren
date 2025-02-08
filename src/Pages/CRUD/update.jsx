@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Update = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const {id} = useParams();
   const [data, setData] = useState(null);
 
@@ -44,7 +44,7 @@ const Update = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, umkm_id) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -66,7 +66,7 @@ const Update = () => {
       }
     }).then(() => {
       alert("Data berhasil diubah");
-      navigate("/admin");
+      navigate( `/admin/menu/${umkm_id}`);
     })
   }
 
@@ -203,7 +203,7 @@ const Update = () => {
               <hr className="border-gray-200 mb-2" />
               <Button
                 className="mt-1 bg-gray-200 text-black"
-                  onClick={handleSubmit}
+                  onClick={()=>handleSubmit(event, id)}
               >
                 Submit
               </Button>

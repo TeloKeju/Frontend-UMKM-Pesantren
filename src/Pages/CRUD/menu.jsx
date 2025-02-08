@@ -17,7 +17,7 @@ import axios from "axios";
 
 const Menu = () => {
   const [data, setData] = useState([]);
-  const { id } = useParams();
+  const { id } = useParams();   
   let navigate = useNavigate();
   
   useEffect(() => {
@@ -41,7 +41,7 @@ const Menu = () => {
   const handleDelete = async (idMenu) => {
     await axios.delete(`http://127.0.0.1:8000/api/menu?id=${idMenu}`).then(() => {
       alert("Data berhasil dihapus");
-      navigate(`/admin/menu/${id}`);
+      window.location.reload();
     })
   }
   
