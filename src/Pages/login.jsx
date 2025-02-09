@@ -10,7 +10,7 @@ const Login = () => {
   let navigate = useNavigate();
   onsubmit = (e) => {
     e.preventDefault();
-    if(username === "admin" && password === "admin"){
+    if(username === "AdminUMKMpesantren890" && password === "Adminadminpesantren098"){
       navigate('/admin', { replace: true });
       localStorage.setItem("login", true);
     }else{
