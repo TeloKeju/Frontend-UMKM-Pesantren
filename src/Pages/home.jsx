@@ -15,7 +15,6 @@ const Home = ({ setLoading }) => {
   const [minuman, setMinuman] = useState([]);
   const [jasa, setJasa] = useState([]);
 
-  console.log(import.meta.env.VITE_API_URL)
   useEffect(() => {
     async function makanan() {
       return await axios.get(`${import.meta.env.VITE_API_URL}/umkm/category/makanan`);
