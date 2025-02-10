@@ -29,7 +29,7 @@ const Menu = () => {
     }
 
     let getData = async () => {
-      return await axios.get(`http://127.0.0.1:8000/api/umkm/menu/${id}`);
+      return await axios.get(`${import.meta.env.VITE_API_URL}/umkm/menu/${id}`);
     }
     getData().then((data) =>{
       setData(data.data);
@@ -39,7 +39,7 @@ const Menu = () => {
 
 
   const handleDelete = async (idMenu) => {
-    await axios.delete(`http://127.0.0.1:8000/api/menu?id=${idMenu}`).then(() => {
+    await axios.delete(`${import.meta.env.VITE_API_URL}/menu?id=${idMenu}`).then(() => {
       alert("Data berhasil dihapus");
       window.location.reload();
     })
@@ -81,7 +81,7 @@ const Menu = () => {
                 <Table.Cell>
                   <img
                     className=""
-                    src={`http://127.0.0.1:8000/${item.image}`}
+                    src={`${import.meta.env.VITE_IMAGE}${item.image}`}
                     alt=""
                   />
                 </Table.Cell>

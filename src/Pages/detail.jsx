@@ -37,7 +37,7 @@ const menu = [
 
   useEffect(() => {
     async function fetchData() {
-      return await axios.get(`http://127.0.0.1:8000/api/umkm/${id}`);
+      return await axios.get(`${import.meta.env.VITE_API_URL}/umkm/${id}`);
     }
 
     fetchData().then((res) => {
@@ -97,7 +97,7 @@ const menu = [
           <div className="relative flex justify-center items-center">
             <img
               className="w-full"
-              src={`http://127.0.0.1:8000/${data.image}`}
+              src={`${import.meta.env.VITE_IMAGE}${data.image}`}
               alt="foto makanan"
             />
           </div>
@@ -155,7 +155,7 @@ const menu = [
                         <div className="flex justify-center items-center relative w-full">
                           <img
                             className="h-[150px] w-[400px] sm:h-[300px] sm:w-[400] object-cover"
-                            src={`http://127.0.0.1:8000/${item.image}`}
+                            src={`${import.meta.env.VITE_IMAGE}${item.image}`}
                             alt=""
                           />
                         </div>

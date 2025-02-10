@@ -37,14 +37,14 @@ const Admin = () => {
     }
 
     let getData = async () => {
-      return await axios.get("http://127.0.0.1:8000/api/umkm");
+      return await axios.get(`${import.meta.env.VITE_API_URL}/umkm`);
     };
     getData().then((data) => setUmkm(data.data));
   }, []);
 
   const deleteClick = async (id) => {
     try{
-      await axios.delete(`http://127.0.0.1:8000/api/umkm?id=${id}`).then(() => {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/umkm?id=${id}`).then(() => {
         alert("Data berhasil dihapus");
         window.location.reload();
       })
@@ -70,7 +70,7 @@ const Admin = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/umkm",
+        `${import.meta.env.VITE_API_URL}/umkm`,
         formData,
         {
           headers: {
@@ -89,7 +89,7 @@ const Admin = () => {
 
   let editClick = async (id) => {
     setOpenModal(true);
-    await axios.get(`http://127.0.0.1:8000/api/umkm/${id}`).then((data) => {
+    await axios.get(`${import.meta.env.VITE_API_URL}/umkm/${id}`).then((data) => {
       setNama(data.data.namaUmkm || "");
       setDescription(data.data.description || "");
       setKategori(data.data.category || "");
@@ -142,7 +142,7 @@ const Admin = () => {
                         <Table.Cell>
                           <img
                             className=""
-                            src={`http://127.0.0.1:8000/${data.image}`}
+                            src={`${import.meta.env.VITE_IMAGE}${data.image}`}
                             alt=""
                           />
                         </Table.Cell>
