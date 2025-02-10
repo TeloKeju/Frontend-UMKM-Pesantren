@@ -17,14 +17,14 @@ const Home = ({ setLoading }) => {
 
   useEffect(() => {
     async function makanan() {
-      return await axios.get("http://127.0.0.1:8000/api/umkm/category/makanan");
+      return await axios.get(`${import.meta.env.VITE_API_URL}/umkm/category/makanan`);
     }
     async function minuman() {
-      return await axios.get("http://127.0.0.1:8000/api/umkm/category/minuman");
+      return await axios.get(`${import.meta.env.VITE_API_URL}/umkm/category/minuman`);
     }
 
     async function jasa() {
-      return await axios.get("http://127.0.0.1:8000/api/umkm/category/jasa");
+      return await axios.get(`${import.meta.env.VITE_API_URL}/umkm/category/jasa`);
     }
     makanan().then((res) => {
       setMakanan(res.data);
@@ -111,7 +111,7 @@ const Home = ({ setLoading }) => {
                         <div className="flex justify-center items-center relative w-full">
                           <img
                             className="h-[150px] w-[400px] sm:h-[300px] sm:w-[400] object-cover"
-                            src={`http://127.0.0.1:8000/${item.image}`}
+                            src={`${import.meta.env.VITE_IMAGE}${item.image}`}
                             alt=""
                           />
                         </div>
@@ -157,7 +157,7 @@ const Home = ({ setLoading }) => {
                         <div className="flex justify-center items-center relative w-full">
                           <img
                             className="h-[150px] w-[400px] sm:h-[300px] sm:w-[400] object-cover"
-                            src={`http://127.0.0.1:8000/${item.image}`}
+                            src={`${import.meta.env.IMAGE}${item.image}`}
                             alt=""
                           />
                         </div>
@@ -204,7 +204,7 @@ const Home = ({ setLoading }) => {
                         <div className="flex justify-center items-center relative w-full">
                           <img
                             className="h-[150px] w-[400px] sm:h-[300px] sm:w-[400] object-cover"
-                            src={`http://127.0.0.1:8000/${item.image}`}
+                            src={`${import.meta.env.VITE_IMAGE}${item.image}`}
                             alt=""
                           />
                         </div>

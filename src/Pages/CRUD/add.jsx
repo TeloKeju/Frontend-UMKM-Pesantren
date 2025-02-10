@@ -37,7 +37,7 @@ const Add = () => {
     formData.append("tiktok", tiktok);
     formData.append("facebook", facebook);
 
-    await axios.post("http://127.0.0.1:8000/api/umkm", formData, {
+    await axios.post(`${import.meta.env.VITE_API_URL}/umkm`, formData, {
       headers: {
       'Content-Type': 'multipart/form-data'
       }

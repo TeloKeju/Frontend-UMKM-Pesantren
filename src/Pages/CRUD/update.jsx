@@ -28,7 +28,7 @@ const Update = () => {
   useEffect(() => {
 
     const fetchData = async () => {
-      await axios.get(`http://127.0.0.1:8000/api/umkm/${id}`).then((res) => {
+      await axios.get(`${import.meta.env.VITE_API_URL}/umkm/${id}`).then((res) => {
         setData(res.data);
         setNama(res.data.namaUmkm);
         setDescription(res.data.description);
@@ -60,7 +60,7 @@ const Update = () => {
     formData.append("tiktok", tiktok);
     formData.append("facebook", facebook);
 
-    await axios.post(`http://127.0.0.1:8000/api/umkm/${id}`, formData, {
+    await axios.post(`${import.meta.env.VITE_API_URL}/umkm/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
